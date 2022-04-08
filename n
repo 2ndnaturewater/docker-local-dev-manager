@@ -88,6 +88,10 @@ def dispatcher(args, docker, config):
     elif arg1 in ["reset", "xx"]:
         if yesno("This will remove all data. Are you sure?", "no"):
             docker.reset()
+    
+    elif arg1 in ["refresh"]:
+        if yesno("This will remove your project data. Are you sure?", "no"):
+            docker.refresh()
 
     elif arg1 in ["logs", "log", "l"]:
         if arg2:
@@ -430,13 +434,21 @@ class Docker:
             self.console.print("Container Removed")
         except:
             self.console.print("Error Removing Container")
-
+        
     def reset(self):
         try:
             self.remove(True)
             self.run()
         except:
-            self.console.print("Reset Failed")
+            self.console.print("Error Resetting Container")
+
+    def refresh(self):
+        try:
+            self.remove()
+            os.system("docker volume rm 2nform")
+            self.run()
+        except:
+            self.console.print("Refresh Failed")
 
     def restore(self, file=False):
         try:
@@ -685,6 +697,8 @@ def showHelp():
         ["[blue]reset[yellow]|[blue]xx",
          "[yellow]Reset Container [red](Data Lost)"],
         ["", ""],
+        ["[blue]refresh",
+         "[yellow]Drop projects and re-clone/setup"],
         ["[blue]restore",
          "[yellow]Start a Database Restore [blue](Pulls latest backup)"],
         ["", ""],
