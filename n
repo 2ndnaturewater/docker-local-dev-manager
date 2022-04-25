@@ -2,7 +2,6 @@
 
 # 2N Docker Manager for Local Dev
 
-import docker
 import os
 import shutil
 import sys
