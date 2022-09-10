@@ -157,10 +157,6 @@ class Config:
             assert type(self.get("container", "volumes")) == dict
             assert type(self.get("container", "environment")) == list
 
-            if self.get("container", "image") != self.image:
-                self.update("containe", "image", self.image)
-                self.write()
-
         except Exception as e:
             self.error()
 
@@ -217,7 +213,14 @@ class Config:
                     'GIT_USERNAME=',
                     'GIT_EMAIL=',
                     'AWS_ACCESS_KEY_ID=',
-                    'AWS_SECRET_ACCESS_KEY='
+                    'AWS_SECRET_ACCESS_KEY=',
+                    'REMOVE_DATABASE_PASSWORDS=true',
+                    "CODE_SERVER=false",
+                    "CLOUD_BEAVER=false",
+                    "EMACS=false",
+                    "PYCHARM=false",
+                    "SUBLIME=false",
+                    "GITKRAKEN=false"
                 ]
             }
         }
